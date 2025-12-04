@@ -75,3 +75,10 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+  check:
+    needs: [lint, test, deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Final check
+        run: echo "All previous jobs completed."
